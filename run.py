@@ -1,6 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import plotext
+import numpy as np
 
 """
 the app is connected via API to google sheets for easy access to
@@ -141,6 +142,85 @@ def raw_data_plot_generation(title, xlabel, ylabel):
 
     return integration_data
 
+
+def update_worksheet(data, worksheet):
+    """
+    Receives a list of integers to be inserted into a worksheet
+    Update the relevant worksheet with the data provided
+    """
+    print(f"Updating {worksheet} worksheet...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f"{worksheet} worksheet updated successfully\n")
+
+
+def calculate_integration_area(
+        raw_data, sample, int1, int2, int3, int4, int5,
+        int6):
+    """
+    Calculates the area under the graph for entire region and calculations
+
+    the numpy library uses the composite trapezoidal rule
+    The composite trapezoidal rule is a method for
+    approximating a definite integral
+    by evaluating the integrand at n points.
+    Let [a,b] be the interval of integration with a partition a=x0<x1<…<xn=b.
+    more info: https://planetmath.org/compositetrapezoidalrule
+    """
+    print("Calculating integration data...\n")
+    integration_data = raw_data
+    # convert into floats
+    data_after = {e[0]: e[1:] for e in integration_data}
+    xdata = data_after['Wavenumbers']
+    xdata = [s.replace(',', '') for s in xdata]
+
+    ydata = data_after[sample]
+    ydata = [s.replace(',', '') for s in ydata]
+    xdata = [float(i) for i in xdata]
+    ydata = [float(i) for i in ydata]
+
+    # search for the integration index
+    # the selected values for partial integration
+    integration_border_One = xdata.index(int1)
+    integration_border_Two = xdata.index(int2)
+    integration_border_Three = xdata.index(int3)
+    integration_border_Four = xdata.index(int4)
+    integration_border_Five = xdata.index(int5)
+    integration_border_Six = xdata.index(int6)
+
+    integration_row = []
+
+    total_int = np.trapz(ydata, xdata)
+    # integrate the entire data-set
+    integration_row.append(total_int)
+    # integrate hydroxyl group
+    xdata_int_1 = xdata[integration_border_One:integration_border_Two]
+    ydata_int_1 = ydata[integration_border_One:integration_border_Two]
+    partial_int = np.trapz(ydata_int_1, xdata_int_1)
+
+    integration_row.append(partial_int)
+    # integrate CH3 group
+    xdata_int_2 = xdata[integration_border_Two:integration_border_Three]
+    ydata_int_2 = ydata[integration_border_Two:integration_border_Three]
+    partial_int_2 = np.trapz(ydata_int_2, xdata_int_2)
+
+    integration_row.append(partial_int_2)
+    # integrate CH2 group
+    xdata_int_3 = xdata[integration_border_Three:integration_border_Four]
+    ydata_int_3 = ydata[integration_border_Three:integration_border_Four]
+    partial_int_3 = np.trapz(ydata_int_3, xdata_int_3)
+
+    integration_row.append(partial_int_3)
+    # integrate Carbonyl group
+    xdata_int_4 = xdata[integration_border_Five:integration_border_Six]
+    ydata_int_4 = ydata[integration_border_Five:integration_border_Six]
+    partial_int_4 = np.trapz(ydata_int_4, xdata_int_4)
+
+    integration_row.append(partial_int_4)
+
+    return integration_row
+
+
 def get_sample_name(ind):
     """
     get the name of the sample taht is being calculated.
@@ -180,6 +260,13 @@ def main():
         Sample = get_sample_name(x)
 
         raw_data = raw_data_plot_generation(Sample, x_axes, y_axes)
+        # Integration borders can be changed regarding your specifications
+        integrated_data = calculate_integration_area(
+            raw_data,
+            Sample, int_limit1, int_limit2, int_limit3,
+            int_limit4, int_limit5, int_limit6
+            )
+        update_worksheet(integrated_data, "Integrated_Data")
 
 print("Welcome to Spectral Data Automation")
 
