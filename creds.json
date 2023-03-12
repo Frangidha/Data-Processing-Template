@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "milestoneproject3",
+  "private_key_id": "5ef9b66330e2532c19c76d8e653e1542f0c9ac78",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCxz6enUPquvDjq\n8wg0frFb+1fR5EDlnxvrKq+DvpBrdkQWTpMHErCbiaL2zboXorNpT7hYsf2qNlMB\n0q0m4IJ6PpUAn1yl2RxEV9vGwQQOCI1ruEutxXUCljAeM3Ni82ZzTsYHQMvhcZHU\nAN9zB0HDuO3I/IaAzeG67OD5VqWc+JNGDi+8xK9CVU4EaCaHG3TgGDrvHJmERSUn\npvgcACsov8eo5Y/dn1Py754S9akiJdZ30eWvUy9E4I1KreoJWuVU2riem5H/HHTF\npArm9S2XnWCobXv57RRXcGh0onNrHhviD09SFpbfVWbARL16LqfQdd8+XLm1A9mo\nmuj61eLlAgMBAAECggEAFdxHCyPCUiG7aK1M7LFHylx2EUy76s8bLlge4HZZCJEv\ncUOjQVsbod+zzJ6B2r6Kyq99pU/qtRa9MUvutEklWXSguoUdLZmp50Aa+c5ImpYU\nFvJ/QWO1jUYcL9ZZAQkWJyZ/46vkdPjSuisKTbjObcrqVwuu2J6XOjU9uoHb1han\nwq6suS878K92hjkNsNCeUtoeTPi22C4SZQj1JcORubjbUgKPR5aS6aKdcvxTC+gZ\nQvWoP+QtIPY6+bZhkg/Jh0W5lLj1zI0cWX8ub5dPKtNO2hxYO3xRRS+3yqnFqqqc\n2NNWNBUO4lQSp6MfKhjZPKFY5BnFH54GiGVIZV9rCQKBgQDrj11uZ7u++8WdzZun\nSY4h8D5EpPviPggAznrK6CJIzCzDPOJpKePgCCsTgiK5DP3qxSM7GKofYatNefIz\nFmtkqcI0JoiAsfJl55qgmQhCgtq0m94D5rz5LtV52/ruiMJuuQV/vxSk5X183Gc8\nRaA+BpnTh03oUvjK9YsIzVXMTQKBgQDBPXrdJ1DBsxNpNlPkES4Abqpu7WgnkfSm\nflnqWJCvXYBDGwkfiFv75bL57PKtetj57B0oLyXE3Cq6AbsweR+y5iMcP6ENAwKF\nK1auM6hYQWjiiqz1gr962YYEtLUjmS9QPkO5NXn/yOYn/7iXWhA/2WzrmkA5o/d2\n/uCayhDc+QKBgQC2b6l36YVBy/LoXaZwsIoRBOTk+zZNqac/IKt/XLu4z9DXQN9F\nfXkMOKdMC5zi3woE+rtneJnBhj5K2ehX4sQ4CTXsd+9+ZNMMU4yxVvRLtta1zIXt\nVZYEE16oa1PzzB1x7YAxyQavE0HWI0kdJ/uMLkaSyhbvmNsxLWyJ26XYfQKBgDEK\nYTvu1lfSEoMI/pFKqtoBO8+bAGvKZsQ6HKeUgmN+3yYonlAaUv3CdYFn2M6d9qK2\ngU/JZ1Rma5F5DwBmPN0x+ocYvs6GjQUu0nizM23ya6PSfcJwxBdxTMm08qNuJMvA\ngX9nSubXHVHZXAdNHAKYM0Q3iUUXj53rYSTnUxBBAoGAYZG2sZ3NEkBgGTJd8VMk\njeO5uNDmF9N9bhIUZNcVrQTUS9FTwG/fkRJgsHqam/NhyJ1tjsch0VVQpFXLtTcH\ng5aXebQXkdpEtsPty9m0aKMgxNDtCQ1w65WieidFSmPTucDYJXL+MefIpUueUheB\nlnY4yxGndMASW4HcLTFo8sU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "milestoneproject3@milestoneproject3.iam.gserviceaccount.com",
+  "client_id": "117393727735967964981",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/milestoneproject3%40milestoneproject3.iam.gserviceaccount.com"
+}
