@@ -9,10 +9,12 @@ the old data. Secondly for a data control perspective to find back the data
 in case of an audit. it is split in 3 sheets to easily see
 each manipulation of the data.
 """
+
 # How to check if the values
 # Plot parameters - scatterplot
 x_axes = "Wavenumbers (1/cm)"
 y_axes = "Absorbance"
+
 # Integration limit variable
 int_limit1 = 1018.856
 int_limit2 = 1302.502
@@ -20,6 +22,13 @@ int_limit3 = 1418.276
 int_limit4 = 1501.247
 int_limit5 = 1688.416
 int_limit6 = 1896.809
+
+# how to set your limit variables to get the requested comments
+high_limit = 2
+low_limit = 0
+high_value = 0.75
+low_value = 0.3
+medium_value = 0.5
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -349,6 +358,60 @@ def ratio_evaluation(
     return head1, head2, head3
 
 
+def get_last_5_entires_ratio_values():
+    """
+    Collect columns of data from calculation worksheet.
+    Get the last 5 entries for each sample and return the data
+    as a list of lists.
+    """
+
+    Ratio_data = SHEET.worksheet("Calculation_index")
+
+    Ratio_data_array = []
+    for ind in range(1, 5):
+        column = Ratio_data.col_values(ind)
+        Ratio_data_array.append(column[-5:])
+
+    Data_list_1 = []
+    for ind in range(0, 5):
+        column = Ratio_data_array[0][ind]
+        Data_list_1.append(column)
+    Data_list_2 = []
+    for ind in range(0, 5):
+        column = Ratio_data_array[1][ind]
+        Data_list_2.append(column)
+    Data_list_3 = []
+    for ind in range(0, 5):
+        column = Ratio_data_array[2][ind]
+        Data_list_3.append(column)
+    Data_list_4 = []
+    for ind in range(0, 5):
+        column = Ratio_data_array[3][ind]
+        Data_list_4.append(column)
+    return Data_list_1, Data_list_2, Data_list_3, Data_list_4
+
+
+def plot_barchart(samples, data, ratio):
+
+    """
+    take al the Data and combine them to make the plot of the last
+    5 entries to see the evolution of trends
+    """
+    print(f"{ratio} is being generated\n")
+    # clean up the Data
+    data_replace = [s.replace(',', '.') for s in data]
+    # Determine y limits
+    ymax = float(max(data_replace))
+    ymin = round(float(min(data_replace))*0.98, 2)
+    data_barchart = list(map(float, data_replace))
+    plotext.ylim(ymin, ymax)
+    plotext.plotsize(100, 30)
+    plotext.bar(samples, data_barchart)
+    plotext.title(ratio)
+    plotext.show()
+    plotext.clear_figure()
+
+
 def get_sample_name(ind):
     """
     get the name of the sample taht is being calculated.
@@ -403,6 +466,17 @@ def main():
             high_value, medium_value, low_value
             )
         x = x - 1
+        # timer has been put in place not to overload the API
+        # it will keep limit possible crashes
+        time.sleep(10)
+
+    # title
+    # xlabel, ylabel
+    bar_sample, bar_r1, bar_r2, bar_r3 = get_last_5_entires_ratio_values()
+    # title, xlabel, ylabel
+    plot_barchart(bar_sample, bar_r1, h1)
+    plot_barchart(bar_sample, bar_r2, h2)
+    plot_barchart(bar_sample, bar_r3, h3)
 
 print("Welcome to Spectral Data Automation")
 
