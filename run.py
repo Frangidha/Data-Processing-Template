@@ -104,6 +104,15 @@ def validate_drive_data(confirmation):
 
     return True
 
+def get_sample_name(ind):
+    """
+    get the name of the sample taht is being calculated.
+    """
+
+    Sample_Name = SHEET.worksheet("Raw_Data")
+    sample_column = Sample_Name.col_values(1)
+    sample = sample_column[-abs(ind)]
+    return sample
 
 def loop_data():
     """
@@ -127,6 +136,11 @@ def main():
     Run all program functions
     """
     launch_raw_data()
+    old_data, new_data, range_data, loop = loop_data()
+    x = loop
+    
+    for ind in reversed(range(loop)):
+        Sample = get_sample_name(x)
 
 print("Welcome to Spectral Data Automation")
 
