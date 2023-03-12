@@ -57,7 +57,7 @@ def launch_raw_data():
         if validate_drive_data(confirmation):
             print("Data is valid!")
             break
-        
+
 def validate_drive_data(confirmation):
     """
     Inside the try, converts all string values into integers.
@@ -103,6 +103,24 @@ def validate_drive_data(confirmation):
         return False
 
     return True
+
+
+def loop_data():
+    """
+    This code is used to check the Raw_Data sheet if the data input is correct.
+    it checks if new data was added compared to the already existing data.
+    Secondly it will check if the length of data input is correct of each row.
+    this Data is also used for the value and
+    Sample input value to know where to start.
+    """
+    raw_data = SHEET.worksheet("Raw_Data").get_all_values()
+    integration_data = SHEET.worksheet("Integrated_Data").get_all_values()
+    new_data = len(raw_data)
+    old_data_rows = len(integration_data)
+    range_data = int(new_data) + 1
+    loop = new_data - old_data_rows
+
+    return old_data_rows, new_data, range_data, loop
 
 def main():
     """
