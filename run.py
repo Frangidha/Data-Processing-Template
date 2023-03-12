@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import plotext
 import numpy as np
+import time
 
 """
 the app is connected via API to google sheets for easy access to
@@ -41,6 +42,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('data_treatment')
 
+
 def launch_raw_data():
     """
     Get Raw figures input from the user.
@@ -79,6 +81,7 @@ def launch_raw_data():
         if validate_drive_data(confirmation):
             print("Data is valid!")
             break
+
 
 def validate_drive_data(confirmation):
     """
@@ -265,6 +268,7 @@ def calculate_ratio(integrated_data, Sample):
 
     return Calculated_index
 
+
 def ratio_evaluation(
         data, Sample, High_Lim, Low_Lim, High_ind, Medium_ind,
         Low_ind):
@@ -422,6 +426,7 @@ def get_sample_name(ind):
     sample = sample_column[-abs(ind)]
     return sample
 
+
 def loop_data():
     """
     This code is used to check the Raw_Data sheet if the data input is correct.
@@ -438,6 +443,54 @@ def loop_data():
     loop = new_data - old_data_rows
 
     return old_data_rows, new_data, range_data, loop
+
+
+def Test_Data():
+    """
+        the Data was tested using https://www.integral-calculator.com/
+        and integration by hand. this function is made to quickly check
+        and compared the values using a set
+        of know values using the trap integration from the numpy library.
+    """
+    # linear function Data
+    xdata1 = [
+        100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300,
+        1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500,
+        2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400, 3500
+            ]
+    ydata1 = [
+        20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130,
+        140, 150, 160, 170, 180, 190, 200, 210,
+        220, 230, 240, 250, 260, 270, 280, 290, 300,
+        310, 320, 330, 340, 350, 360
+            ]
+    # exponential function Data
+    xdata2 = [
+        100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200,
+        1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000
+         ]
+    ydata2 = [
+        2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192,
+        16384, 32768, 65536, 131072, 262144, 524288, 1048576
+        ]
+    int_test1 = np.trapz(ydata1, xdata1)
+    int_test2 = np.trapz(ydata2, xdata2)
+    deviation = int_test2/151144859
+    Low_Limit = 0.95
+    High_Limit = 1.05
+    if (int_test1 == 646000):
+        # exponential function Data instead of a absolute value
+        # it is ratio that checks that the data doesn't deviate 5%.
+        # otherwise it will display a fault message.
+        if (deviation > Low_Limit):
+            print("the linear integration is the same as the calculated value")
+            if (deviation < High_Limit):
+                print("the exponential integration is within the range")
+        else:
+            print("please check the programme and the integration values")
+    else:
+        print("please check the programme")
+
 
 def main():
     """
@@ -473,11 +526,18 @@ def main():
     # title
     # xlabel, ylabel
     bar_sample, bar_r1, bar_r2, bar_r3 = get_last_5_entires_ratio_values()
+
     # title, xlabel, ylabel
     plot_barchart(bar_sample, bar_r1, h1)
     plot_barchart(bar_sample, bar_r2, h2)
     plot_barchart(bar_sample, bar_r3, h3)
 
+
 print("Welcome to Spectral Data Automation")
 
+# Test data of integration using the trapz numpy library
+# comparing to the classical method
+# Test_Data()
+
+# Runs the program
 main()
