@@ -256,6 +256,98 @@ def calculate_ratio(integrated_data, Sample):
 
     return Calculated_index
 
+def ratio_evaluation(
+        data, Sample, High_Lim, Low_Lim, High_ind, Medium_ind,
+        Low_ind):
+
+    """
+    it takes the calculated data afterwards it give
+    comments on this ratio and give recommendation or if
+    the Data is not possible repeats the programma
+    """
+
+    Ratio_data = SHEET.worksheet("Calculation_index")
+
+    headers = []
+    for ind in range(1, 5):
+        column = Ratio_data.col_values(ind)
+        headers.append(column[0])
+
+    # get the headers for the table
+    head = headers[0]
+    head1 = headers[1]
+    head2 = headers[2]
+    head3 = headers[3]
+
+    ratio1 = float(data[1])
+    ratio2 = float(data[2])
+    ratio3 = float(data[3])
+
+    x1 = round(ratio1, 3)
+    x2 = round(ratio2, 3)
+    x3 = round(ratio3, 3)
+
+    print("Calculated Data Table:\n")
+    # the date table
+    print("{:<15} {:<15} {:<15} {:<15}".format(head, head1, head2, head3))
+    print("{:<15} {:<15} {:<15} {:<15}".format(Sample, x1, x2, x3))
+
+    print("")
+    print("Data Interpretation:")
+    # comments to each ratio regarding the set limits
+    if ratio1 > High_Lim:
+        print(f"{head1} seems to be outside the expected range\n")
+    elif ratio1 > High_ind:
+        print(f"{head1} seems to be quite high\n")
+    elif ratio1 > Medium_ind:
+        print(f"{head1} seems to be quite normal\n")
+    elif ratio1 > Low_ind:
+        print(f"{head1} seems to be quite low\n")
+    elif ratio1 < Low_ind:
+        print(f"{head1} seems to be Very low\n")
+    elif ratio1 < Low_Lim:
+        print(f"{head1} is negative please remeasure\n")
+        launch_raw_data()
+    else:
+        print("oops something went wrong")
+        launch_raw_data()
+
+    if ratio2 > High_Lim:
+        print(f"{head2} seems to be outside the expected range\n")
+    elif ratio2 > High_ind:
+        print(f"{head2} seems to be quite high\n")
+    elif ratio2 > Medium_ind:
+        print(f"{head2} seems to be quite normal\n")
+    elif ratio2 > Low_ind:
+        print(f"{head2} seems to be quite low\n")
+    elif ratio2 < Low_ind:
+        print(f"{head2} seems to be Very low\n")
+    elif ratio2 < Low_Lim:
+        print(f"{head2} is negative please remeasure\n")
+        launch_raw_data()
+    else:
+        print("oops something went wrong")
+        launch_raw_data()
+
+    if ratio3 > High_Lim:
+        print(f"{head3} seems to be outside the expected range\n")
+    elif ratio3 > High_ind:
+        print(f"{head3} seems to be quite high\n")
+    elif ratio3 > Medium_ind:
+        print(f"{head3} seems to be quite normal\n")
+    elif ratio3 > Low_ind:
+        print(f"{head3} seems to be quite low\n")
+    elif ratio3 < Low_ind:
+        print(f"{head3} seems to be Very low\n")
+    elif ratio3 < Low_Lim:
+        print(f"{head3} is negative please remeasure")
+        launch_raw_data()
+    else:
+        print("oops something went wrong")
+        launch_raw_data()
+
+    return head1, head2, head3
+
 
 def get_sample_name(ind):
     """
@@ -305,6 +397,12 @@ def main():
         update_worksheet(integrated_data, "Integrated_Data")
         ratio_data = calculate_ratio(integrated_data, Sample)
         update_worksheet(ratio_data, "Calculation_index")
+        # High Limit, low Limit, high value, normal, value, low value
+        h1, h2, h3 = ratio_evaluation(
+            ratio_data, Sample, high_limit, low_limit,
+            high_value, medium_value, low_value
+            )
+        x = x - 1
 
 print("Welcome to Spectral Data Automation")
 
