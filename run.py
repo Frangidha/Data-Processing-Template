@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import plotext
 
 """
 the app is connected via API to google sheets for easy access to
@@ -7,6 +8,10 @@ the old data. Secondly for a data control perspective to find back the data
 in case of an audit. it is split in 3 sheets to easily see
 each manipulation of the data.
 """
+# How to check if the values
+# Plot parameters - scatterplot
+x_axes = "Wavenumbers (1/cm)"
+y_axes = "Absorbance"
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -104,6 +109,38 @@ def validate_drive_data(confirmation):
 
     return True
 
+
+def raw_data_plot_generation(title, xlabel, ylabel):
+
+    """
+    This function will take the Raw Data values and plot
+    them in graph to give a visual representation.
+
+    """
+    input_text = "The plot is generating, it will generate"\
+        "in a couple of seconds...\n"
+
+    print(input_text)
+    integration_data = SHEET.worksheet("Raw_Data").get_all_values()
+
+    data_after = {e[0]: e[1:] for e in integration_data}
+    # turn data form string to float
+    xdata = data_after['Wavenumbers']
+    xdata = [s.replace(',', '') for s in xdata]
+    xdata = [float(i) for i in xdata]
+    ydata = data_after[title]
+    ydata = [s.replace(',', '') for s in ydata]
+    ydata = [float(i) for i in ydata]
+    # plot the raw spectrum
+    plotext.scatter(xdata, ydata)
+    plotext.title(f"Spectrum of {title}")
+    plotext.xlabel(xlabel)
+    plotext.ylabel(ylabel)
+    plotext.show()
+    plotext.clear_figure()
+
+    return integration_data
+
 def get_sample_name(ind):
     """
     get the name of the sample taht is being calculated.
@@ -138,9 +175,11 @@ def main():
     launch_raw_data()
     old_data, new_data, range_data, loop = loop_data()
     x = loop
-    
+
     for ind in reversed(range(loop)):
         Sample = get_sample_name(x)
+
+        raw_data = raw_data_plot_generation(Sample, x_axes, y_axes)
 
 print("Welcome to Spectral Data Automation")
 
