@@ -57,7 +57,58 @@ def launch_raw_data():
         if validate_drive_data(confirmation):
             print("Data is valid!")
             break
+        
+def validate_drive_data(confirmation):
+    """
+    Inside the try, converts all string values into integers.
+    Raises ValueError if strings cannot be converted into int,
+    or if there aren't exactly 6 values.
+    """
+    try:
+        # see loop_data function for explanation
+        old_data, new_data, range_data, loop = loop_data()
+        if confirmation == 'x':
+            raw_data = SHEET.worksheet("Raw_Data")
+            # checks if new-data is added
+            if old_data < new_data:
+                data_array = []
+                lenght_data = []
+                for ind in range(1, range_data):
+                    column = raw_data.row_values(ind)
+                    data_array.append(column[1:])
+                    # checks if the data does not contain any strings
+                    data_array = [
+                        [str(s).replace(',', '') for s in group]
+                        for group in data_array
+                        ]
+                    data_array = [
+                        [float(value) for value in group]
+                        for group in data_array
+                        ]
+                for x in data_array:
+                    # add the lenght to the data_array
+                    jls_extract_var = lenght_data
+                    jls_extract_var.append(len(x))
 
+                high_val = max(lenght_data)
+                low_val = min(lenght_data)
+                if high_val != lenght_data[0]:
+                    raise ValueError(f"too many data points({high_val})")
+                elif low_val != lenght_data[0]:
+                    raise ValueError(f"not enough data points({low_val})")
+            else:
+                raise ValueError("did you add new Data?\n")
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
+
+def main():
+    """
+    Run all program functions
+    """
+    launch_raw_data()
 
 print("Welcome to Spectral Data Automation")
 
