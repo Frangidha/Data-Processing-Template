@@ -13,6 +13,13 @@ each manipulation of the data.
 # Plot parameters - scatterplot
 x_axes = "Wavenumbers (1/cm)"
 y_axes = "Absorbance"
+# Integration limit variable
+int_limit1 = 1018.856
+int_limit2 = 1302.502
+int_limit3 = 1418.276
+int_limit4 = 1501.247
+int_limit5 = 1688.416
+int_limit6 = 1896.809
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -221,6 +228,35 @@ def calculate_integration_area(
     return integration_row
 
 
+def calculate_ratio(integrated_data, Sample):
+    """
+    Calculate the ratio index for each item type.
+    getting the integration values from google sheet
+    calculated by the previous function
+    Use of division and addition
+    """
+
+    int1 = float(integrated_data[0])
+    int2 = float(integrated_data[1])
+    int3 = float(integrated_data[2])
+    int4 = float(integrated_data[3])
+    int5 = float(integrated_data[4])
+
+    Calculated_index = []
+    Calculated_index.append(Sample)
+    # Carbonyl index
+    Ratio1 = int5/(int4+int3)
+    Calculated_index.append(Ratio1)
+    # Branching index
+    Ratio2 = int3/(int3+int4)
+    Calculated_index.append(Ratio2)
+    # hydroxyl index
+    Ratio3 = int2/int1
+    Calculated_index.append(Ratio3)
+
+    return Calculated_index
+
+
 def get_sample_name(ind):
     """
     get the name of the sample taht is being calculated.
@@ -267,6 +303,8 @@ def main():
             int_limit4, int_limit5, int_limit6
             )
         update_worksheet(integrated_data, "Integrated_Data")
+        ratio_data = calculate_ratio(integrated_data, Sample)
+        update_worksheet(ratio_data, "Calculation_index")
 
 print("Welcome to Spectral Data Automation")
 
