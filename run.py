@@ -6,12 +6,12 @@ import time
 
 """
 the app is connected via API to google sheets for easy access to
-the old data. Secondly for a data control perspective to find back the data
+the old data and adding new data.
+Secondly for a data control perspective to find back the data
 in case of an audit. it is split in 3 sheets to easily see
 each manipulation of the data.
 """
 
-# How to check if the values
 # Plot parameters - scatterplot
 x_axes = "Wavenumbers (1/cm)"
 y_axes = "Absorbance"
@@ -31,6 +31,7 @@ high_value = 0.75
 low_value = 0.3
 medium_value = 0.5
 
+# API constants
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -47,12 +48,12 @@ def launch_raw_data():
     """
     Get Raw figures input from the user.
     Run a while loop to collect a valid data from the user
-    via the API in google sheets, which must be a string of x numbers separated
-    by commas. The loop will repeatedly request data, until it is valid.
+    via the API in google sheets, which must be a string of x numbers.
+    The loop will repeatedly request data, until it is valid.
     """
     while True:
         text_input = "have you put in your data"\
-                    "data please confirm by typing 'x':"
+                    "data please confirm by typing 'x':\n"
         link = "https://docs.google.com/spreadsheets/d/"\
             "1cEWBDHZ35fzQ320SUUwLCcgsBtijk0C3keXW9kgA0Uc/edit#gid=0\n"\
             "/edit?usp=sharing"
@@ -65,7 +66,7 @@ def launch_raw_data():
         print("You can alsways consult the user guide\n")
         print(linkUser)
         print("Data should be the same range as the other samples\n")
-        print("Put the Data in the googe sheets using this file: ")
+        print("Put the Data in the googe sheets using this file:")
         print(link)
         print("Example:")
         print(
@@ -85,9 +86,9 @@ def launch_raw_data():
 
 def validate_drive_data(confirmation):
     """
-    Inside the try, converts all string values into integers.
-    Raises ValueError if strings cannot be converted into int,
-    or if there aren't exactly 6 values.
+    Inside the try, converts all string values into floats.
+    Raises ValueError if strings cannot be converted into float,
+    or if there aren't exactly the same values as the Wavenumbers.
     """
     try:
         # see loop_data function for explanation
@@ -164,7 +165,7 @@ def raw_data_plot_generation(title, xlabel, ylabel):
 
 def update_worksheet(data, worksheet):
     """
-    Receives a list of integers to be inserted into a worksheet
+    Receives a list of floats to be inserted into a worksheet
     Update the relevant worksheet with the data provided
     """
     print(f"Updating {worksheet} worksheet...\n")
@@ -418,7 +419,7 @@ def plot_barchart(samples, data, ratio):
 
 def get_sample_name(ind):
     """
-    get the name of the sample taht is being calculated.
+    get the name of the sample that is being calculated.
     """
 
     Sample_Name = SHEET.worksheet("Raw_Data")
@@ -520,7 +521,7 @@ def main():
             )
         x = x - 1
         # timer has been put in place not to overload the API
-        # it will keep limit possible crashes
+        # it will limit possible crashes
         time.sleep(10)
 
     # title

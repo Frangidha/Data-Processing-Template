@@ -1,10 +1,10 @@
 <h1>Data-Integration-template</h1>
 This project was created in order for QC(quality control) labs or students to easily keep track of their products. It will allow them to keep track of certain chemical information about their products as well as update them using an easy to use google sheets API. this example has been made to check different type of olive oils.
 
-an FTIR(Fourier transform infrared) spectrum of olive oil with attributed band is displayd. a change in spectrum can appear depending of the olive oil itself.
+an FTIR(Fourier transform infrared) spectrum of olive oil with attributed band is displayed. a change in spectrum can appear depending of the olive oil itself.
 <img src="readme/images/Spectrum.png" alt="a spectrum of olive oil">
 <h2>Site Goals</h2>
-<p>This is a simple application to give user a template to quickly modify and quickly keep track of their data and do data manipulation on them</p>
+<p>This is a simple application to give user a template to quickly modify and quickly keep track of their data and do data manipulation on their data</p>
 
 <h2>User Guide</h2>
 <p>A quick user guide can be found on google sheet documents using the following link</p>
@@ -125,15 +125,15 @@ As a future enhancement, I would like to add some basic functionality to have an
 <li>Time packages was imported to slow down the code for 10 second to not overload the API</li>
 </ul>
 <h2>Testing</h2>
-<img src="readme/images/Testing.jpg" alt="picture of the landingpage of the website">
+<img src="readme/images/Testing.jpg" alt="Testing results">
 
 
 <h3>Pep8 Validation</h3>
 
-All python code was ran through pep8online.com validator and any warnings or errors were fixed. Code then validated successfully.
+<p>All python code was ran through pep8online.com validator and any warnings or errors were fixed. Code then validated successfully.</p>
 
-In gitpod, warning was displayed by linter that string statement has no effect at line 6 but this is mainly used for documentation.
-Unuses variables because this function give 4 output and is different variables are used in different functions but all variables are used. So this warning is ignored.
+<p>In gitpod, warning was displayed by linter that string statement has no effect at line 6 but this is mainly used for documentation.
+Unuses variables because this function give 4 output and is different variables are used in different functions but all variables are used. So this warning is ignored.</p>
 <img src="readme/images/Results.jpg" alt="No Error PEP8" />
 
 <h3>Bugs and fixes</h3>
@@ -173,7 +173,7 @@ The below steps were followed to deploy this project to Heroku:
 <h3>Clone Locally</h3>
 <ul>
 <li>Open IDE of choice and type the following into the terminal:</li>
-<li>git clone xxx</li>
+<li>git clone https://github.com/Frangidha/Data-Processing-Template.git</li>
 <li>Project will now be cloned locally.</li>
 <li>Open your IDE of choice (git must be installed for the next steps)</li>
 <li>Type git clone copied-git-url into the IDE terminal</li>
