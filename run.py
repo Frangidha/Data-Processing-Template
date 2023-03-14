@@ -56,17 +56,17 @@ def launch_raw_data():
                     "data please confirm by typing 'x':\n"
         link = "https://docs.google.com/spreadsheets/d/"\
             "1cEWBDHZ35fzQ320SUUwLCcgsBtijk0C3keXW9kgA0Uc/edit#gid=0\n"\
-            "/edit?usp=sharing"
+            "/edit?usp=sharing\n"
         linkUser = "https://docs.google.com/document/d/"\
             "15TESpf-30ibR4NBzRKcN6XyxgjuNqkzDge-6oaH0oxI"\
-            "/edit?usp=sharing"
+            "/edit?usp=sharing\n"
 
         print("Please enter raw data in the google drive form.\n")
         print("questions how to input the data?")
         print("You can alsways consult the user guide\n")
         print(linkUser)
         print("Data should be the same range as the other samples\n")
-        print("Put the Data in the googe sheets using this file:")
+        print("Put the Data in the google sheets using this file:\n")
         print(link)
         print("Example:")
         print(
