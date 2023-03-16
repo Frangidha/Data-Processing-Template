@@ -167,7 +167,7 @@ The below steps were followed to deploy this project to Heroku:
 <li>Navigate to "Deploy". Set the deployment method to Github and enter repository name and connect.</li>
 <li>Scroll down to Manual Deploy, select "main" branch and click "Deploy Branch".</li>
 <li>The app will now be deployed to heroku</li>
-<li><a source ="https://data-integration-template.herokuapp.com/" target="_blank">link to application</a></li>
+<li><a href="https://data-integration-template.herokuapp.com/" target="_blank">link to application</a></li>
  </ul>
 
 <h3>Clone Locally</h3>
