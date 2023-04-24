@@ -123,7 +123,7 @@ def validate_drive_data(confirmation):
                     raise ValueError(f"not enough data points({low_val})")
             else:
                 raise ValueError("did you add new Data?\n")
-        else: 
+        else:
             raise ValueError("Invalid input: Please press 'x' if you want"
                              "to run the program")
     except ValueError as e:
