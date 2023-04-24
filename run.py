@@ -63,7 +63,7 @@ def launch_raw_data():
 
         print("Please enter raw data in the google drive form.\n")
         print("questions how to input the data?")
-        print("You can alsways consult the user guide\n")
+        print("You can always consult the user guide\n")
         print(linkUser)
         print("Data should be the same range as the other samples\n")
         print("Put the Data in the google sheets using this file:\n")
@@ -113,8 +113,7 @@ def validate_drive_data(confirmation):
                         ]
                 for x in data_array:
                     # add the lenght to the data_array
-                    jls_extract_var = lenght_data
-                    jls_extract_var.append(len(x))
+                    lenght_data.append(len(x))
 
                 high_val = max(lenght_data)
                 low_val = min(lenght_data)
@@ -124,6 +123,9 @@ def validate_drive_data(confirmation):
                     raise ValueError(f"not enough data points({low_val})")
             else:
                 raise ValueError("did you add new Data?\n")
+        else: 
+            raise ValueError("Invalid input: Please press 'x' if you want"
+                             "to run the program")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
