@@ -52,8 +52,8 @@ def launch_raw_data():
     The loop will repeatedly request data, until it is valid.
     """
     while True:
-        text_input = "have you put in your data"\
-                    "data please confirm by typing 'x':\n"
+        text_input = "have you put in your data?"\
+                    " Please confirm by typing 'x':\n"
         link = "https://docs.google.com/spreadsheets/d/"\
             "1cEWBDHZ35fzQ320SUUwLCcgsBtijk0C3keXW9kgA0Uc/edit#gid=0\n"\
             "/edit?usp=sharing\n"
@@ -65,6 +65,7 @@ def launch_raw_data():
         print("questions how to input the data?")
         print("You can always consult the user guide\n")
         print(linkUser)
+        print("Data should be the same range as the other samples\n")
         print("Put the Data in the google sheets using this file:\n")
         print(link)
         print("Example:")
@@ -123,8 +124,8 @@ def validate_drive_data(confirmation):
             else:
                 raise ValueError("did you add new Data?\n")
         else:
-            raise ValueError("Invalid input: Please press 'x' if you want"
-                             "to run the program")
+            raise ValueError("Please press 'x' if you want"
+                             " to run the program")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
