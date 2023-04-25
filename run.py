@@ -65,7 +65,6 @@ def launch_raw_data():
         print("questions how to input the data?")
         print("You can always consult the user guide\n")
         print(linkUser)
-        print("Data should be the same range as the other samples\n")
         print("Put the Data in the google sheets using this file:\n")
         print(link)
         print("Example:")
