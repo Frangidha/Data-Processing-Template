@@ -121,6 +121,11 @@ def validate_drive_data(confirmation):
                     raise ValueError(f"too many data points({high_val})")
                 elif low_val != lenght_data[0]:
                     raise ValueError(f"not enough data points({low_val})")
+            elif old_data > new_data:
+                raise ValueError("did you remove a row from the raw data file?"
+                                 " Please, remove the same rows from the"
+                                 " integrated_Data sheet?\n")
+
             else:
                 raise ValueError("did you add new Data?\n")
         else:
