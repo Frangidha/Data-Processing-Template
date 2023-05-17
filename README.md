@@ -127,6 +127,33 @@ it will ask you to put in new data and will check it again when you press "x"in 
 <h2>Testing</h2>
 <img src="readme/images/Testing.jpg" alt="Testing results">
 
+<h3>Error handling</h3>
+<img src="readme/images/Error_handling.jpg" alt="Error Handling">
+<ol>
+  <li>
+    <strong>Confirmation check:</strong>
+    <p>The code verifies if the user has pressed the 'x' key for program execution. If 'x' is not pressed, a <strong>ValueError</strong> is raised with the message "Please press 'x' if you want to run the program."</p>
+  </li>
+  <li>
+    <strong>Data addition check:</strong>
+    <p>If the <code>confirmation</code> variable is 'x', the code proceeds to check if new data has been added. It compares the values of <code>old_data</code> and <code>new_data</code>. If <code>old_data</code> is less than <code>new_data</code>, the code performs data processing operations. If <code>old_data</code> is greater than <code>new_data</code>, it raises a <strong>ValueError</strong> with the message "Did you remove a row from the raw data file? Please remove the same rows from the integrated_Data sheet?" If <code>old_data</code> is equal to <code>new_data</code>, it raises a <strong>ValueError</strong> with the message "Did you add new data?"</p>
+  </li>
+  <li>
+    <strong>Data correctness check:</strong>
+    <p>Within the data processing logic, several checks are performed on the data. These include:</p>
+    <ul>
+      <li>Ensuring the absence of any strings in the data. If any strings are found, they are replaced with an empty string.</li>
+      <li>Removing commas from the data, if present.</li>
+      <li>Converting the data values to floating-point format.</li>
+      <li>Calculating the lengths of each data set and storing them in the <code>lenght_data</code> list.</li>
+      <li>Comparing the lengths with the initial length (<code>lenght_data[0]</code>). If any lengths differ, a <strong>ValueError</strong> is raised with the appropriate message.</li>
+    </ul>
+  </li>
+  <li>
+    <strong>Exception handling:</strong>
+    <p>If any <strong>ValueError</strong> exception occurs within the <code>try</code> block, it is caught in the <code>except ValueError</code> block. The caught exception is assigned to the variable <code>e</code>, and an error message is printed, indicating the nature of the invalid data. The function then returns <strong>False</strong>.</p>
+  </li>
+</ol>
 
 <h3>Pep8 Validation</h3>
 
